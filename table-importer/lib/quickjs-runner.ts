@@ -346,6 +346,44 @@ function __makeCell(row, column) {
     },
     get HasFormula() {
       return __hasFormula(safeRow, safeColumn);
+    },
+    End(direction) {
+      // xlUp: -4162, xlDown: -4121, xlToLeft: -4159, xlToRight: -4161
+      const usedRows = __usedRows();
+      const usedCols = __usedColumns();
+      if (direction === -4162) {
+        // xlUp: find first non-empty cell above, or row 1
+        for (let r = safeRow; r >= 1; r--) {
+          const v = __getCellValue(r, safeColumn);
+          if (v != null && v !== "") return __makeCell(r, safeColumn);
+        }
+        return __makeCell(1, safeColumn);
+      }
+      if (direction === -4121) {
+        // xlDown: find first non-empty cell below, or last used row
+        for (let r = safeRow; r <= usedRows; r++) {
+          const v = __getCellValue(r, safeColumn);
+          if (v != null && v !== "") return __makeCell(r, safeColumn);
+        }
+        return __makeCell(usedRows, safeColumn);
+      }
+      if (direction === -4159) {
+        // xlToLeft
+        for (let c = safeColumn; c >= 1; c--) {
+          const v = __getCellValue(safeRow, c);
+          if (v != null && v !== "") return __makeCell(safeRow, c);
+        }
+        return __makeCell(safeRow, 1);
+      }
+      if (direction === -4161) {
+        // xlToRight
+        for (let c = safeColumn; c <= usedCols; c++) {
+          const v = __getCellValue(safeRow, c);
+          if (v != null && v !== "") return __makeCell(safeRow, c);
+        }
+        return __makeCell(safeRow, usedCols);
+      }
+      throw new Error("End() expects xlUp/xlDown/xlToLeft/xlToRight");
     }
   };
 }
@@ -441,6 +479,9 @@ function __makeRange(startRow, startColumn, endRow, endColumn, kind) {
         return;
       }
       throw new Error("Insert is only supported for entire rows or columns in this MVP");
+    },
+    End(direction) {
+      return this.Cells(rowCount(), columnCount()).End(direction);
     }
   };
 
@@ -492,6 +533,13 @@ function Range(reference, endReference) {
   const parsed = __parseRangeReference(reference);
   return __makeRange(parsed.startRow, parsed.startColumn, parsed.endRow, parsed.endColumn);
 }
+
+// VBA enumerations
+globalThis.xlUp = -4162;
+globalThis.xlDown = -4121;
+globalThis.xlToLeft = -4159;
+globalThis.xlToRight = -4161;
+globalThis.xlNone = -4142;
 
 globalThis.ActiveSheet = {
   Cells(row, column) {

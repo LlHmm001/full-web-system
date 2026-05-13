@@ -789,7 +789,7 @@ function PreviewTable({
               {row.map((cell, columnIndex) => (
                 <td
                   key={`${rowIndex}-${columnIndex}`}
-                  className="min-w-36 max-w-72 border-b border-r border-slate-200 p-0 text-slate-700"
+                  className={`border-b border-r border-slate-200 p-0 text-slate-700 ${columnIndex === 4 ? "min-w-[500px]" : "min-w-36"}`}
                   title={cell === null ? "" : String(cell)}
                 >
                   <EditablePreviewCell
