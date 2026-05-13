@@ -5,10 +5,7 @@ CREATE DATABASE IF NOT EXISTS mydb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode
 USE mydb;
 SET NAMES utf8mb4;
 
--- 兼容旧版客户端：改用 mysql_native_password
--- 密码由 docker-compose 环境变量 MYSQL_ROOT_PASSWORD / MYSQL_PASSWORD 统一管理
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password;
-ALTER USER 'app_user'@'%' IDENTIFIED WITH mysql_native_password;
+-- MySQL 8.0 默认 caching_sha2_password，PHP 8.4 原生支持，无需降级插件
 
 DROP TABLE IF EXISTS `colour`;
 CREATE TABLE `colour` (
