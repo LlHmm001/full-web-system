@@ -33,7 +33,7 @@
 $host = getenv('DB_HOST') ?: 'qgskdt-db-mysql.ns-ya272tf8';
 $dbname = getenv('DB_NAME') ?: 'mydb';
 $username = getenv('DB_USER') ?: 'root';
-$password = getenv('DB_PASSWORD') ?: '9vzn8qlr';
+$password = getenv('DB_PASSWORD');
 
 try {
     // 建立数据库连接
