@@ -1,0 +1,36 @@
+# 环境变量（含密码，勿提交）
+.env
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# 日志
+*.log
+logs/
+
+# 缓存
+cache/
+tmp/
+temp/
+
+# 依赖
+vendor/
+node_modules/
+
+# 备份
+*.sql.gz
+*.tar.gz
+backups/
+
+# 运行时
+*.pid

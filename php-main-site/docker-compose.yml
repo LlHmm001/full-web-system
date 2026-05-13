@@ -1,0 +1,63 @@
+services:
+  # ========================================
+  # PHP + Apache 应用服务
+  # ========================================
+  app:
+    container_name: php_main_site_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=${TZ:-Asia/Shanghai}
+      - DB_HOST=mysql
+      - DB_NAME=${MYSQL_DATABASE:-mydb}
+      - DB_USER=root
+      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "${APP_HOST_PORT:-3001}:80"
+    networks:
+      - php_main_site_network
+      - apps_shared_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ========================================
+  # MySQL 数据库服务
+  # ========================================
+  mysql:
+    container_name: php_main_site_mysql
+    image: mysql:8.0
+    environment:
+      - TZ=${TZ:-Asia/Shanghai}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-change_me}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-mydb}
+      - MYSQL_USER=${MYSQL_USER:-app_user}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-change_me}
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - php_main_site_network
+      - apps_shared_network
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+# ========================================
+# Networks
+# ========================================
+networks:
+  php_main_site_network:
+    name: php_main_site_network
+    driver: bridge
+  apps_shared_network:
+    name: apps_shared_network
+    driver: bridge

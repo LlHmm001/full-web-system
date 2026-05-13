@@ -1,0 +1,36 @@
+name: dbgate
+
+services:
+  dbgate:
+    image: ${DBGATE_IMAGE:-dbgate/dbgate:latest}
+    container_name: dbgate
+    init: true
+    restart: unless-stopped
+    environment:
+      LOGIN: ${DBGATE_LOGIN:-admin}
+      PASSWORD: ${DBGATE_PASSWORD:?Set DBGATE_PASSWORD in .env}
+      BASIC_AUTH: ${DBGATE_BASIC_AUTH:-}
+      LANGUAGE: ${DBGATE_LANGUAGE:-zh}
+    ports:
+      - "${DBGATE_PORT:-3008}:3000"
+    volumes:
+      - dbgate-data:/root/.dbgate
+    networks:
+      - apps_shared_network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://127.0.0.1:3000').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\""
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+networks:
+  apps_shared_network:
+    external: true
+
+volumes:
+  dbgate-data:
