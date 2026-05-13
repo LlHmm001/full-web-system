@@ -12,7 +12,7 @@ services:
       - DB_HOST=mysql
       - DB_NAME=${MYSQL_DATABASE:-mydb}
       - DB_USER=root
-      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD:-change_me}
     ports:
       - "${APP_HOST_PORT:-3001}:80"
     networks:
@@ -44,7 +44,7 @@ services:
     ports:
       - "3307:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-change_me}"]
       interval: 10s
       timeout: 5s
       retries: 5
