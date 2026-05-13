@@ -12,8 +12,12 @@ echo "========================================"
 cd "${ROOT_DIR}"
 
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  echo "Pull latest code for full repository..."
-  git pull
+  if git remote -v 2>/dev/null | grep -q .; then
+    echo "Pull latest code for full repository..."
+    git pull
+  else
+    echo "No git remote configured. Skipping git pull."
+  fi
 else
   echo "Warning: ${ROOT_DIR} is not a git repository. Skipping git pull."
 fi
