@@ -129,17 +129,18 @@ body {
 
 /* 文本框 */
 .a30c002c7796 > svg {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  transform: translate(0px,0px);
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
 .a30c002c7796 {
   position: relative;
-  width: 964.32px;
-  height: 187.844px;
+  width: 100%;
+  max-width: 964.32px;
+  height: auto;
   flex-shrink: 0;
-  margin: 20px 0px 20px 0px;
+  margin: 20px auto;
 }
 
 /* svg-path */
