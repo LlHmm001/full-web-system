@@ -6,8 +6,9 @@ USE mydb;
 SET NAMES utf8mb4;
 
 -- 兼容旧版客户端：改用 mysql_native_password
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '9vzn8qlr';
-ALTER USER 'app_user'@'%' IDENTIFIED WITH mysql_native_password BY 'app_user_2024_secure';
+-- 密码由 docker-compose 环境变量 MYSQL_ROOT_PASSWORD / MYSQL_PASSWORD 统一管理
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password;
+ALTER USER 'app_user'@'%' IDENTIFIED WITH mysql_native_password;
 
 DROP TABLE IF EXISTS `colour`;
 CREATE TABLE `colour` (
