@@ -6,7 +6,8 @@ dist
 .env*.local
 .env*.
 !.env.example
-.data
+.data/*
+!.data/macros.json
 node_modules/
 venv/
 __pycache__/
