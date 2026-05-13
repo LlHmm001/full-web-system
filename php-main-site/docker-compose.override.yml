@@ -1,0 +1,7 @@
+# Development override — mounts source code for hot-reload (Apache reads directly)
+# Remove this file or rename it to disable development mode
+
+services:
+  app:
+    volumes:
+      - ./src:/var/www/html:ro

@@ -22,6 +22,32 @@ services:
       - table_importer_network
       - apps_shared_network
 
+  dev:
+    container_name: table_importer_dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    profiles:
+      - dev
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+      PORT: ${APP_CONTAINER_PORT:-3003}
+    ports:
+      - "${APP_HOST_PORT:-3003}:${APP_CONTAINER_PORT:-3003}"
+    volumes:
+      - ./components:/app/components
+      - ./app:/app/app
+      - ./lib:/app/lib
+      - ./.data:/app/.data
+      - ./logs:/app/logs
+      - /app/node_modules
+    networks:
+      - table_importer_network
+      - apps_shared_network
+
 networks:
   table_importer_network:
     name: table_importer_network

@@ -48,6 +48,7 @@ export default function MacroWorkbench() {
   const [importResult, setImportResult] = useState<ImportDbResponse | null>(null);
   const [titleValue, setTitleValue] = useState("");
   const [colors, setColors] = useState<{ id: number; colour: string }[]>([]);
+  const [svgCode, setSvgCode] = useState("");
 
   const selectedMacro = useMemo(
     () => macros.find((macro) => macro.id === selectedMacroId) ?? null,
@@ -58,6 +59,7 @@ export default function MacroWorkbench() {
     void refreshMacros();
     void loadTitle();
     void loadColors();
+    void loadSvg();
   }, []);
 
   async function loadTitle() {
@@ -71,6 +73,13 @@ export default function MacroWorkbench() {
     try {
       const data = await api<{ id: number; colour: string }[]>("/api/config/colors");
       setColors(data);
+    } catch { /* ignore if table doesn't exist yet */ }
+  }
+
+  async function loadSvg() {
+    try {
+      const data = await api<{ svgCode: string }>("/api/config/svg");
+      setSvgCode(data.svgCode);
     } catch { /* ignore if table doesn't exist yet */ }
   }
 
@@ -296,6 +305,17 @@ export default function MacroWorkbench() {
         body: JSON.stringify({ value: titleValue })
       });
       setStatus("标题已保存");
+    });
+  }
+
+  async function handleSaveSvg() {
+    await withRequest(async () => {
+      await api("/api/config/svg", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ svgCode })
+      });
+      setStatus("SVG已保存");
     });
   }
 
@@ -632,6 +652,21 @@ export default function MacroWorkbench() {
                 ))}
                 <button className={primaryButton + " w-full"} onClick={handleAddColor} disabled={busy}>
                   新增色值
+                </button>
+              </div>
+            </section>
+
+            <section className="rounded-lg border border-slate-200 bg-white p-3 shadow-panel">
+              <h2 className="text-sm font-semibold text-slate-900">SVG管理</h2>
+              <div className="mt-3 space-y-3">
+                <textarea
+                  className={`${inputClass} h-32 resize-y font-mono text-xs`}
+                  value={svgCode}
+                  onChange={(event) => setSvgCode(event.target.value)}
+                  placeholder="<svg>...</svg>"
+                />
+                <button className={primaryButton + " w-full"} onClick={handleSaveSvg} disabled={busy}>
+                  保存SVG
                 </button>
               </div>
             </section>
