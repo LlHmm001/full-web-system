@@ -14,7 +14,7 @@ cd "${ROOT_DIR}"
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   if git remote -v 2>/dev/null | grep -q .; then
     echo "Pull latest code for full repository..."
-    git pull
+    git pull || echo "git pull failed, continuing..."
   else
     echo "No git remote configured. Skipping git pull."
   fi

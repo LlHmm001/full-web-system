@@ -1,5 +1,8 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
+# Use domestic mirrors for Alpine apk and npm
+RUN sed -i 's|dl-cdn.alpinelinux.org|mirrors.aliyun.com|g' /etc/apk/repositories
+RUN npm config set registry https://registry.npmmirror.com
 COPY package.json package-lock.json ./
 RUN npm ci
 

@@ -59,5 +59,4 @@ networks:
     name: php_main_site_network
     driver: bridge
   apps_shared_network:
-    name: apps_shared_network
-    driver: bridge
+    external: true

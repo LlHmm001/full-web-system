@@ -1,10 +1,24 @@
 [
   {
+    "id": "ce1d96a4-7f60-4942-9984-14ef1fb50623",
+    "name": "版权标处理",
+    "code": "function Macro() {\r\n    const sheet = ActiveSheet;\r\n    const columnH = sheet.Columns(\"H\");\r\n\r\n    for (let row = 2; row <= 1000; row++) {\r\n        const cell = columnH.Rows(row);\r\n        const value = cell.Value2;\r\n\r\n        if (value !== null && value !== undefined && value !== \"\") {\r\n            let text = String(value);\r\n            let newText = text;\r\n\r\n            // 先清理已有标识，避免重复添加\r\n            newText = newText.split(\"当责®\").join(\"当责\");\r\n            newText = newText.split(\"左圆右方创新®\").join(\"左圆右方创新\");\r\n            newText = newText.split(\"岗位经验内化™\").join(\"岗位经验内化\");\r\n            newText = newText.split(\"别剧一格™\").join(\"别剧一格\");\r\n            newText = newText.split(\"管理魔法镜™\").join(\"管理魔法镜\");\r\n            newText = newText.split(\"体验创值画布™\").join(\"体验创值画布\");\r\n            newText = newText.split(\"明师优徒®\").join(\"明师优徒\");\r\n            newText = newText.split(\"赢战山河®\").join(\"赢战山河\");\r\n            newText = newText.split(\"AI搭档™\").join(\"AI搭档\");\r\n            newText = newText.split(\"极简绩效™\").join(\"极简绩效\");\r\n            newText = newText.split(\"岁月赢家™\").join(\"岁月赢家\");\r\n            newText = newText.split(\"财效罗盘™\").join(\"财效罗盘\");\r\n            newText = newText.split(\"破壁行动™\").join(\"破壁行动\");\r\n            newText = newText.split(\"人人师®\").join(\"人人师\");\r\n            newText = newText.split(\"五维人才官®\").join(\"五维人才官\");\r\n            newText = newText.split(\"天龙八步®\").join(\"天龙八步\");\r\n            newText = newText.split(\"天龙八部®\").join(\"天龙八部\");\r\n            newText = newText.split(\"华赢增长™\").join(\"华赢增长\");\r\n            newText = newText.split(\"赢保制胜™\").join(\"赢保制胜\");\r\n            newText = newText.split(\"识才提效™\").join(\"识才提效\");\r\n            newText = newText.split(\"聚沙成塔™\").join(\"聚沙成塔\");\r\n\r\n            // 再直接替换\r\n            newText = newText.split(\"当责\").join(\"当责®\");\r\n            newText = newText.split(\"左圆右方创新\").join(\"左圆右方创新®\");\r\n            newText = newText.split(\"岗位经验内化\").join(\"岗位经验内化™\");\r\n            newText = newText.split(\"别剧一格\").join(\"别剧一格™\");\r\n            newText = newText.split(\"管理魔法镜\").join(\"管理魔法镜™\");\r\n            newText = newText.split(\"体验创值画布\").join(\"体验创值画布™\");\r\n            newText = newText.split(\"明师优徒\").join(\"明师优徒®\");\r\n            newText = newText.split(\"赢战山河\").join(\"赢战山河®\");\r\n            newText = newText.split(\"AI搭档\").join(\"AI搭档™\");\r\n            newText = newText.split(\"极简绩效\").join(\"极简绩效™\");\r\n            newText = newText.split(\"岁月赢家\").join(\"岁月赢家™\");\r\n            newText = newText.split(\"财效罗盘\").join(\"财效罗盘™\");\r\n            newText = newText.split(\"破壁行动\").join(\"破壁行动™\");\r\n            newText = newText.split(\"人人师\").join(\"人人师®\");\r\n            newText = newText.split(\"五维人才官\").join(\"五维人才官®\");\r\n            newText = newText.split(\"天龙八步\").join(\"天龙八步®\");\r\n            newText = newText.split(\"天龙八部\").join(\"天龙八部®\");\r\n            newText = newText.split(\"华赢增长\").join(\"华赢增长™\");\r\n            newText = newText.split(\"赢保制胜\").join(\"赢保制胜™\");\r\n            newText = newText.split(\"识才提效\").join(\"识才提效™\");\r\n            newText = newText.split(\"聚沙成塔\").join(\"聚沙成塔™\");\r\n\r\n            if (newText !== text) {\r\n                cell.Value2 = newText;\r\n            }\r\n        }\r\n    }\r\n}",
+    "createdAt": "2026-05-27T10:05:18.872Z",
+    "updatedAt": "2026-07-03T09:35:07.473Z"
+  },
+  {
     "id": "eab0dd06-1e75-4401-970e-d5f1ce6f9e92",
     "name": "城市简称",
     "code": "function Macro() {\n      const sheet = ActiveSheet;\n      const columnC = sheet.Columns(\"C\");\n\n      for (let row = 2; row <= sheet.UsedRange.Rows.Count; row++) {\n          const cell = columnC.Rows(row);\n          const text = cell.Text;\n          if (text && text.includes(\"伊犁哈萨克自治州\")) {\n              cell.Value2 = text.replace(\"伊犁哈萨克自治州\", \"伊犁州\");\n          }\n      }\n  }",
     "createdAt": "2026-05-13T08:52:25.137Z",
-    "updatedAt": "2026-05-13T08:52:46.304Z"
+    "updatedAt": "2026-05-27T09:53:34.752Z"
+  },
+  {
+    "id": "77a0bac4-c959-4b2f-ac9d-be0e45db8b5c",
+    "name": "地名简称",
+    "code": "function Macro() {\n      const sheet = ActiveSheet;\n      const columnC = sheet.Columns(\"C\");\n\n      const map = {\n          \"伊犁哈萨克自治州\": \"伊犁州\",\n          \"巴音郭楞蒙古自治州\": \"巴州\",\n          \"博尔塔拉蒙古自治州\": \"博州\",\n          \"克孜勒苏柯尔克孜自治州\": \"克州\",\n          \"昌吉回族自治州\": \"昌吉州\",\n          \"湘西土家族苗族自治州\": \"湘西州\",\n          \"恩施土家族苗族自治州\": \"恩施州\",\n          \"西双版纳傣族自治州\": \"西双版纳州\",\n          \"德宏傣族景颇族自治州\": \"德宏州\",\n          \"怒江傈僳族自治州\": \"怒江州\",\n          \"大理白族自治州\": \"大理州\",\n          \"楚雄彝族自治州\": \"楚雄州\",\n          \"红河哈尼族彝族自治州\": \"红河州\",\n          \"文山壮族苗族自治州\": \"文山州\",\n          \"迪庆藏族自治州\": \"迪庆州\",\n          \"甘孜藏族自治州\": \"甘孜州\",\n          \"阿坝藏族羌族自治州\": \"阿坝州\",\n          \"凉山彝族自治州\": \"凉山州\",\n          \"黔东南苗族侗族自治州\": \"黔东南州\",\n          \"黔西南布依族苗族自治州\": \"黔西南州\",\n          \"黔南布依族苗族自治州\": \"黔南州\",\n          \"海西蒙古族藏族自治州\": \"海西州\",\n          \"海北藏族自治州\": \"海北州\",\n          \"黄南藏族自治州\": \"黄南州\",\n          \"海南藏族自治州\": \"海南州\",\n          \"果洛藏族自治州\": \"果洛州\",\n          \"玉树藏族自治州\": \"玉树州\",\n          \"延边朝鲜族自治州\": \"延边州\",\n          \"锡林郭勒盟\": \"锡盟\",\n          \"黑龙江大兴安岭地区\": \"大兴安岭\"\n      };\n\n      for (let row = 2; row <= sheet.UsedRange.Rows.Count; row++) {\n          const cell = columnC.Rows(row);\n          const text = cell.Text;\n          if (!text) continue;\n\n          let result = text;\n          for (const [full, short] of Object.entries(map)) {\n              if (result.includes(full)) {\n                  result = result.replace(full, short);\n              }\n          }\n          if (result !== text) {\n              cell.Value2 = result;\n          }\n      }\n  }",
+    "createdAt": "2026-05-14T13:39:20.047Z",
+    "updatedAt": "2026-05-14T13:39:47.796Z"
   },
   {
     "id": "12b2f77d-3c6d-4054-bc6c-3e46fbad05b2",
@@ -28,13 +42,6 @@
     "updatedAt": "2026-05-13T02:56:41.103Z"
   },
   {
-    "id": "30a51de3-2bb9-4750-8c81-d412a49a49e6",
-    "name": "处理版权标",
-    "code": "function Macro() {\n  const sheet = ActiveSheet;\n  const replacements = [\n    [\"当责\", \"当责®\"],\n    [\"明师优徒\", \"明师优徒®\"],\n    [\"赢战山河\", \"赢战山河®\"],\n    [\"五维人才官\", \"五维人才官®\"],\n    [\"左圆右方\", \"左圆右方®\"],\n    [\"岗位经验内化\", \"岗位经验内化™\"],\n    [\"体验创值画布\", \"体验创值画布™\"],\n    [\"岁月赢家\", \"岁月赢家™\"],\n    [\"极简绩效\", \"极简绩效™\"],\n    [\"聚沙成塔\", \"聚沙成塔™\"],\n    [\"AI搭档\", \"AI搭档™\"],\n    [\"破壁行动\", \"破壁行动™\"],\n    [\"赢保制胜\", \"赢保制胜™\"],\n    [\"管理魔法镜\", \"管理魔法镜™\"],\n    [\"财效罗盘\", \"财效罗盘™\"],\n    [\"七个陷阱\", \"七个陷阱™\"]\n  ];\n\n  const endRow = ActiveSheet.UsedRange.Rows.Count;\n  for (let row = 2; row <= endRow; row++) {\n    const cell = sheet.Cells(row, 5);\n    if (cell.HasFormula) continue;\n    let value = cell.Value2;\n    if (value && typeof value === \"string\") {\n      for (const [oldName, newName] of replacements) {\n        const suffix = newName.startsWith(oldName) ? newName.slice(oldName.length) : \"\";\n        const pattern = suffix\n          ? new RegExp(oldName + \"(?!\" + suffix + \")\", \"g\")\n          : new RegExp(oldName, \"g\");\n        value = value.replace(pattern, newName);\n      }\n      cell.Value2 = value;\n    }\n  }\n}",
-    "createdAt": "2026-05-12T12:38:01.589Z",
-    "updatedAt": "2026-05-12T12:57:51.170Z"
-  },
-  {
     "id": "84e6453d-a487-4b55-94b2-8bb3c1e577ff",
     "name": "名字添加空格",
     "code": "function Macro() {\n    let targetWorksheet = ActiveSheet\n    let targetWorkbook = ActiveWorkbook\n    let currentRange = ActiveSheet.UsedRange.CurrentRegion\n    let targetRange;\n    targetRange = Range(\"$A$2:$A$506\")\n\n    for (let row = 1; row <= targetRange.Rows.Count; row++) {\n        for (let col = 1; col <= targetRange.Columns.Count; col++) {\n            const cell = targetRange.Cells(row, col)\n            if (cell.Text.length == 2) {\n                cell.Value2 = cell.Text.substring(0, 1) + \"   \" + cell.Text.substring(1)\n            }\n        }\n    }\n}\n",
@@ -49,11 +56,18 @@
     "updatedAt": "2026-05-13T08:57:19.059Z"
   },
   {
+    "id": "042b357c-cd70-4e4d-8c4f-c6c5b6936cce",
+    "name": "删掉行业空格",
+    "code": "function Macro() {\r\n    const sheet = ActiveSheet;\r\n    const columnE = sheet.Columns(\"D\");\r\n    const usedRange = sheet.UsedRange;\r\n    \r\n    for (let row = 2; row <= 139; row++) {\r\n        const cell = columnE.Rows(row);\r\n        const text = cell.Value2;\r\n        if (text && typeof text === \"string\") {\r\n            cell.Value2 = text.replace(/\\s+/g, \"\");\r\n        }\r\n    }\r\n}",
+    "createdAt": "2026-07-13T09:47:35.268Z",
+    "updatedAt": "2026-07-13T09:53:35.254Z"
+  },
+  {
     "id": "d3df7b1c-786c-45b7-adf8-f110e2b99c83",
-    "name": "内容添加空格",
+    "name": "行业添加空格",
     "code": "function Macro() {\n    let targetWorksheet = ActiveSheet\n    let targetWorkbook = ActiveWorkbook\n    let currentRange = ActiveSheet.UsedRange.CurrentRegion\n    let targetRange;\n    targetRange = Range(\"$D$2:$D$506\")\n\n    for (let row = 1; row <= targetRange.Rows.Count; row++) {\n        for (let col = 1; col <= targetRange.Columns.Count; col++) {\n            const cell = targetRange.Cells(row, col)\n            if (cell.Text.length == 2) {\n                cell.Value2 = cell.Text.substring(0, 1) + \" \" + cell.Text.substring(1)\n            }\n        }\n    }\n}",
     "createdAt": "2026-05-12T12:58:34.166Z",
-    "updatedAt": "2026-05-13T03:35:14.028Z"
+    "updatedAt": "2026-07-13T09:53:43.974Z"
   },
   {
     "id": "d83a84d6-f6c9-4ee9-8563-80bd0098bf57",
@@ -61,6 +75,20 @@
     "code": "function Macro() {\n    const sheet = ActiveSheet;\n    const columnE = sheet.Columns(\"E\");\n    const usedRange = sheet.UsedRange;\n    \n    for (let row = 2; row <= 139; row++) {\n        const cell = columnE.Rows(row);\n        const text = cell.Value2;\n        \n        if (text && typeof text === \"string\") {\n            let newText = text.replace(/——|—|一-|-一|--/g, \"-\");\n            if (newText !== text) {\n                cell.Value2 = newText;\n            }\n        }\n    }\n}",
     "createdAt": "2026-05-12T12:58:58.903Z",
     "updatedAt": "2026-05-12T12:59:10.976Z"
+  },
+  {
+    "id": "2902ad0f-a3e4-4e2e-9f02-3ab61c45edaa",
+    "name": "大小写英文参数",
+    "code": "function Macro() {\r\n      const sheet = ActiveSheet;\r\n      const columnE = sheet.Columns(\"E\");\r\n\r\n      const fixes = [\r\n          [/excel/gi, \"Excel\"],\r\n          [/office/gi, \"Office\"],\r\n          [/wps/gi, \"WPS\"],\r\n          [/word/gi, \"Word\"],\r\n          [/ppt/gi, \"PPT\"],\r\n          [/pdf/gi, \"PDF\"],\r\n          [/ai\\b/gi, \"AI\"],\r\n          [/chatgpt/gi, \"ChatGPT\"],\r\n          [/openai/gi, \"OpenAI\"],\r\n          [/deepseek/gi, \"DeepSeek\"],\r\n          [/openclaw/gi, \"OpenClaw\"],\r\n          [/python/gi, \"Python\"],\r\n          [/ttm\\b/gi, \"TTM\"],\r\n          [/mrp\\b/gi, \"MRP\"],\r\n          [/mbti/gi, \"MBTI\"],\r\n          [/okr\\b/gi, \"OKR\"],\r\n          [/kpi\\b/gi, \"KPI\"],\r\n          [/swot/gi, \"SWOT\"],\r\n          [/pmbok/gi, \"PMBOK\"],\r\n          [/iso\\b/gi, \"ISO\"],\r\n          [/mou\\b/gi, \"MOU\"],\r\n          [/msp\\b/gi, \"MSP\"],\r\n          [/psm\\b/gi, \"PSM\"],\r\n          [/crm\\b/gi, \"CRM\"],\r\n          [/erp\\b/gi, \"ERP\"],\r\n          [/roi\\b/gi, \"ROI\"],\r\n          [/rpa\\b/gi, \"RPA\"]\r\n      ];\r\n\r\n      for (let row = 2; row <= sheet.UsedRange.Rows.Count; row++) {\r\n          const cell = columnE.Rows(row);\r\n          const text = cell.Text;\r\n          if (!text) continue;\r\n\r\n          let result = text;\r\n          for (const [pattern, replacement] of fixes) {\r\n              result = result.replace(pattern, replacement);\r\n          }\r\n          if (result !== text) {\r\n              cell.Value2 = result;\r\n          }\r\n      }\r\n  }",
+    "createdAt": "2026-05-14T13:50:24.616Z",
+    "updatedAt": "2026-08-07T08:57:18.025Z"
+  },
+  {
+    "id": "0f99b480-2c01-4242-ae26-d59b184e2463",
+    "name": "openclaw大小写转换",
+    "code": "function Macro() {\n      const sheet = ActiveSheet;\n      const columnE = sheet.Columns(\"E\");\n\n      for (let row = 2; row <= sheet.UsedRange.Rows.Count; row++) {\n          const cell = columnE.Rows(row);\n          const text = cell.Text;\n          if (text && /openclaw/i.test(text)) {\n              cell.Value2 = text.replace(/openclaw/gi, \"OpenClaw\");\n          }\n      }\n  }",
+    "createdAt": "2026-05-14T13:35:37.626Z",
+    "updatedAt": "2026-05-14T13:51:03.863Z"
   },
   {
     "id": "d3ba938c-844d-4e59-9bf7-76a8d7317d07",
@@ -100,8 +128,15 @@
   {
     "id": "e9f1a3e2-ad4b-4fa1-8d64-008978854169",
     "name": "短杠处理",
-    "code": "\nfunction Macro() {\n    const sheet = ActiveSheet;\n    const columnE = sheet.Columns(\"E\");\n    const usedRange = sheet.UsedRange;\n    const dashPatterns = [\"——\", \"—\", \"一-\", \"-一\", \"--\", \"--\", \"-\"];\n    \n    for (let row = 2; row <= 170; row++) {\n        const cell = columnE.Rows(row);\n        const value = cell.Value2;\n        \n        if (value && typeof value === \"string\") {\n            let newValue = value;\n            for (const pattern of dashPatterns) {\n                newValue = newValue.replace(new RegExp(pattern, \"g\"), \"-\");\n            }\n            if (newValue !== value) {\n                cell.Value2 = newValue;\n            }\n        }\n    }\n}",
+    "code": "\r\nfunction Macro() {\r\n    const sheet = ActiveSheet;\r\n    const columnE = sheet.Columns(\"E\");\r\n    const usedRange = sheet.UsedRange;\r\n    const dashPatterns = [\"—\",\"——\", \"—\", \"—-\", \"-—\", \"--\", \"--\", \"-\"];\r\n    \r\n    for (let row = 2; row <= 170; row++) {\r\n        const cell = columnE.Rows(row);\r\n        const value = cell.Value2;\r\n        \r\n        if (value && typeof value === \"string\") {\r\n            let newValue = value;\r\n            for (const pattern of dashPatterns) {\r\n                newValue = newValue.replace(new RegExp(pattern, \"g\"), \"-\");\r\n            }\r\n            if (newValue !== value) {\r\n                cell.Value2 = newValue;\r\n            }\r\n        }\r\n    }\r\n}",
     "createdAt": "2026-05-13T08:14:13.125Z",
-    "updatedAt": "2026-05-13T08:14:28.116Z"
+    "updatedAt": "2026-08-05T10:22:45.816Z"
+  },
+  {
+    "id": "aff16c61-b0d9-418d-9d38-d4c3ae7bbd87",
+    "name": "删除多余元素",
+    "code": "function Macro() {\n      const sheet = ActiveSheet;\n      const columnE = sheet.Columns(\"E\");\n\n      for (let row = 2; row <= sheet.UsedRange.Rows.Count; row++) {\n          const cell = columnE.Rows(row);\n          const text = cell.Text;\n          if (text && (text.includes(\"amp；\") || text.includes(\"amp;\"))) {\n              cell.Value2 = text.replace(/amp[；;]/g, \"\");\n          }\n      }\n  }\n",
+    "createdAt": "2026-05-14T13:33:51.808Z",
+    "updatedAt": "2026-05-14T13:34:05.342Z"
   }
 ]

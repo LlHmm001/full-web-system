@@ -1,5 +1,10 @@
 FROM php:8.4-apache
 
+# Use Aliyun Debian mirror for faster apt in China
+RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list.d/debian.sources 2>/dev/null; \
+    echo "deb http://mirrors.aliyun.com/debian bookworm main contrib non-free" > /etc/apt/sources.list.d/mirror.list 2>/dev/null; \
+    true
+
 # 安装 PHP 扩展
 RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-enable pdo_mysql
